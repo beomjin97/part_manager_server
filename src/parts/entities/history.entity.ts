@@ -1,21 +1,14 @@
-import { Column, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Part } from "./part.entity";
 
-export enum HistroyType {
-    IMPORT = "import",
-    EXPORT = "export"
-}
 
-export class Histroy {
+@Entity()
+export class History {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({
-        type: 'enum',
-        enum: HistroyType,
-        default: HistroyType.IMPORT       
-    })
-    type: HistroyType;
+    @Column()
+    isImport: boolean;
 
     @Column()
     date: Date
