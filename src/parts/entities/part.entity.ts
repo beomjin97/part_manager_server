@@ -1,5 +1,5 @@
-import {Entity, Column, OneToMany, IsNull, PrimaryGeneratedColumn} from 'typeorm';
-import { Histroy } from './history.entity';
+import {Entity, Column, OneToMany, PrimaryGeneratedColumn} from 'typeorm';
+import { History } from './history.entity';
 
 @Entity()
 export class Part {
@@ -25,6 +25,6 @@ export class Part {
     })
     DetailedStorageLocation: string;
 
-    @OneToMany(() => Histroy, (history) => history.part)
-    histories: Histroy[]
+    @OneToMany(() => History, (history) => history.part)
+    histories: History[]
 }
