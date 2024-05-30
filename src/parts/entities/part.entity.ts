@@ -26,5 +26,5 @@ export class Part {
     DetailedStorageLocation: string;
 
     @OneToMany(() => Histroy, (history) => history.part)
-    histories: History[]
+    histories: Histroy[]
 }
