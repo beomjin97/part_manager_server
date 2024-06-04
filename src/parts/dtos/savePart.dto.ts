@@ -3,5 +3,8 @@ export class SavePartDto {
     number?: string
     manufacturer: string;
     storageLocation: string;
-    DetailedStorageLocation?: string;
+    detailedStorageLocation?: string;
+    isImport: boolean;
+    date: Date
+    quantity: number;
 }
