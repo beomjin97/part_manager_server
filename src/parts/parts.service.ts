@@ -9,8 +9,7 @@ import { UpdatePartDto } from './dtos/updatePart.dto';
 @Injectable()
 export class PartsService {
     constructor(
-        @InjectRepository(Part) private partRepository: Repository<Part>, 
-        @InjectRepository(History) private readonly historyRepository: Repository<History>
+        @InjectRepository(Part) private partRepository: Repository<Part>
     ) {}
 
     public findAll(): Promise<Part[]> {
@@ -44,7 +43,7 @@ export class PartsService {
         const {number, name, manufacturer, storageLocation, detailedStorageLocation, isImport, date, quantity} = UpdatePartDto;
         await this.identifyExistenceById(id)
         
-        return this.partRepository.update({id}, part);
+        return this.partRepository.update({id}, UpdatePartDto);
     }
 
     private async identifyExistenceById(id: number): Promise<Part> {
