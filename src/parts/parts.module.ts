@@ -3,10 +3,9 @@ import { PartsController } from './parts.controller';
 import { PartsService } from './parts.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Part } from './entities/part.entity';
-import { History } from './entities/history.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([History, Part])],
+  imports: [TypeOrmModule.forFeature([Part])],
   controllers: [PartsController],
   providers: [PartsService]
 })
