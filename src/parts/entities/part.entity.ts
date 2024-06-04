@@ -1,8 +1,12 @@
 import {Entity, Column, OneToMany, PrimaryGeneratedColumn} from 'typeorm';
-import { History } from './history.entity';
+import { History } from 'src/histories/entities/history.entity';
 
 @Entity()
 export class Part {
+    constructor(partial?: Partial<Part>) {
+        Object.assign(this, partial);
+    }
+
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -23,7 +27,7 @@ export class Part {
     @Column({
         nullable: true,
     })
-    DetailedStorageLocation: string;
+    detailedStorageLocation: string;
 
     @OneToMany(() => History, (history) => history.part)
     histories: History[]
