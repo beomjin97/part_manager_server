@@ -5,11 +5,13 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { SavePartDto } from './dtos/savePart.dto';
 import { History } from 'src/histories/entities/history.entity';
 import { UpdatePartDto } from './dtos/updatePart.dto';
+import { HistoriesService } from 'src/histories/histories.service';
 
 @Injectable()
 export class PartsService {
     constructor(
-        @InjectRepository(Part) private partRepository: Repository<Part>
+        @InjectRepository(Part) private readonly partRepository: Repository<Part>,
+        private readonly historiesService: HistoriesService
     ) {}
 
     public findAll(): Promise<Part[]> {
@@ -22,12 +24,11 @@ export class PartsService {
         return part
     }
 
-    public save(savePartDto: SavePartDto): Promise<Part> {
+    public async save(savePartDto: SavePartDto): Promise<Part> {
         const {isImport, date, quantity, ...partProperties} = savePartDto;
         
-        const history = new History({isImport, date, quantity});
+        const history = await this.historiesService.create({isImport, date, quantity});
         const part = new Part(partProperties);
-        
         part.histories = [history];
 
         return this.partRepository.save(part)

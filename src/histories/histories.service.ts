@@ -7,8 +7,8 @@ import { Repository } from "typeorm";
 export class HistoriesService {
     constructor(@InjectRepository(History) private readonly historyRepository : Repository<History> ) {}
 
-    public create(history: Partial<History>) {
-        this.historyRepository.save(new History(history))
+    public create(history: Partial<History>):Promise<History> {
+        return this.historyRepository.save(new History(history))
     }
 
     public delete(id:number) {
