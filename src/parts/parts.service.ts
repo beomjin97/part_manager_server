@@ -6,6 +6,8 @@ import { SavePartDto } from './dtos/savePart.dto';
 import { History } from 'src/histories/entities/history.entity';
 import { UpdatePartDto } from './dtos/updatePart.dto';
 import { HistoriesService } from 'src/histories/histories.service';
+import { AddHistoryDto } from 'src/histories/dtos/addHistory.dto';
+import { UpdateHistoryDto } from 'src/histories/dtos/updateHistory.dto';
 
 @Injectable()
 export class PartsService {
@@ -20,7 +22,7 @@ export class PartsService {
 
     public async findOneById(id: number): Promise<Part> {
         const part = await this.identifyExistenceById(id);
-
+        
         return part
     }
 
@@ -41,17 +43,30 @@ export class PartsService {
     }
 
     public async modify(id: number, UpdatePartDto: UpdatePartDto):Promise<UpdateResult> {
-        const {number, name, manufacturer, storageLocation, detailedStorageLocation, isImport, date, quantity} = UpdatePartDto;
         await this.identifyExistenceById(id)
         
         return this.partRepository.update({id}, UpdatePartDto);
     }
 
     private async identifyExistenceById(id: number): Promise<Part> {
-        const part = await this.findOneById(id);
+        const part = await this.partRepository.findOne({
+            where: {
+                id
+            },
+        });
+
         if (!part) {
             throw new NotFoundException()
         }
         return part
+    }
+
+    public async addHistory(partId: number, addHistoryDto: AddHistoryDto) {
+        const part = await this.identifyExistenceById(partId);
+        const history = await this.historiesService.create(addHistoryDto);
+
+        part.histories = [...part.histories,history]
+        
+        return this.partRepository.save(part);
     }
 }
