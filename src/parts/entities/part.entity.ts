@@ -1,4 +1,4 @@
-import {Entity, Column, OneToMany, PrimaryGeneratedColumn} from 'typeorm';
+import {Entity, Column, OneToMany, PrimaryGeneratedColumn, JoinColumn} from 'typeorm';
 import { History } from 'src/histories/entities/history.entity';
 
 @Entity()
@@ -29,6 +29,7 @@ export class Part {
     })
     detailedStorageLocation: string;
 
-    @OneToMany(() => History, (history) => history.part)
+    @OneToMany((type) => History, (history) => history.part,{eager: true})
+    @JoinColumn()
     histories: History[]
 }
