@@ -11,7 +11,6 @@ import { HistoriesModule } from './histories/histories.module';
     database: "db.sqlite",
     autoLoadEntities: true,
     synchronize: true,
-    dropSchema: true,
   }), PartsModule, HistoriesModule],
   controllers: [AppController],
   providers: [AppService],
