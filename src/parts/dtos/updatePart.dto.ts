@@ -1,4 +1,12 @@
 import { PartialType } from "@nestjs/mapped-types";
-import { SavePartDto } from "./savePart.dto";
 
-export class UpdatePartDto extends PartialType(SavePartDto) {}
+class PartDtoExceptHistory {
+    name: string
+    number?: string
+    manufacturer: string;
+    storageLocation: string;
+    detailedStorageLocation?: string;
+
+}
+
+export class UpdatePartDto extends PartialType(PartDtoExceptHistory) {}
