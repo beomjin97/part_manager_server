@@ -19,6 +19,6 @@ export class History {
     @Column()   
     quantity: number; 
 
-    @ManyToOne(() => Part, (part) => part.histories)
+    @ManyToOne(() => Part, (part) => part.histories, {onDelete: "CASCADE"})
     part: Part;
 }
