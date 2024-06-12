@@ -3,11 +3,9 @@ import { Repository, UpdateResult } from 'typeorm';
 import { Part } from './entities/part.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { SavePartDto } from './dtos/savePart.dto';
-import { History } from 'src/histories/entities/history.entity';
 import { UpdatePartDto } from './dtos/updatePart.dto';
-import { HistoriesService } from 'src/histories/histories.service';
-import { AddHistoryDto } from 'src/histories/dtos/addHistory.dto';
-import { UpdateHistoryDto } from 'src/histories/dtos/updateHistory.dto';
+import { HistoriesService } from '../histories/histories.service';
+import { AddHistoryDto } from '../histories/dtos/addHistory.dto';
 
 @Injectable()
 export class PartsService {

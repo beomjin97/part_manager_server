@@ -1,5 +1,5 @@
 import {Entity, Column, OneToMany, PrimaryGeneratedColumn, JoinColumn} from 'typeorm';
-import { History } from 'src/histories/entities/history.entity';
+import { History } from '../../histories/entities/history.entity';
 
 @Entity()
 export class Part {

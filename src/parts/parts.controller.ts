@@ -2,8 +2,7 @@ import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/commo
 import { PartsService } from './parts.service';
 import { SavePartDto } from './dtos/savePart.dto';
 import { UpdatePartDto } from './dtos/updatePart.dto';
-import { AddHistoryDto } from 'src/histories/dtos/addHistory.dto';
-import { UpdateHistoryDto } from 'src/histories/dtos/updateHistory.dto';
+import { AddHistoryDto } from '../histories/dtos/addHistory.dto';
 
 @Controller('part')
 export class PartsController {
