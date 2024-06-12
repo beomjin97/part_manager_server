@@ -1,5 +1,5 @@
 export class AddHistoryDto {
-    ismport: boolean
+    isImport: boolean
     date: Date
     quantity: number
 }
