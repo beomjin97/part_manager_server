@@ -1,8 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { PartsController } from './parts.controller';
 import { PartsService } from './parts.service';
-import { getRepositoryToken } from '@nestjs/typeorm';
-import { Repository, UpdateResult } from 'typeorm';
+import {  UpdateResult } from 'typeorm';
 import { Part } from './entities/part.entity';
 import { SavePartDto } from './dtos/savePart.dto';
 import { AddHistoryDto } from 'src/histories/dtos/addHistory.dto';
@@ -32,7 +31,9 @@ describe('PartsController', () => {
     part = {
       id: 1,
       number: "test_part_number",
-      name: "test_part_name", 
+      name: "test_part_name",
+      type: "cpu",
+      detailedType: null, 
       manufacturer: "test_manufacturer", 
       storageLocation: "test_storage_location", 
       detailedStorageLocation: "testDetailedStorageLocation", 
@@ -79,6 +80,8 @@ describe('PartsController', () => {
     const savePartDto: SavePartDto = {
       number: "test_number",
       name: "test_name",
+      type: "cpu",
+      detailedType: null,
       manufacturer: "test_company",
       storageLocation: "test_storageLocation",
       detailedStorageLocation: "test_DetailedStorageLocation",

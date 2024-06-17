@@ -33,6 +33,8 @@ describe('PartsService', () => {
       savePartDto = {
         number: "test_number",
         name: "test_name",
+        type: "cpu",
+        detailedType: null,
         manufacturer: "test_company",
         storageLocation: "test_storageLocation",
         detailedStorageLocation: "test_DetailedStorageLocation",

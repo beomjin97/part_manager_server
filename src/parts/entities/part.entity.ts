@@ -16,6 +16,12 @@ export class Part {
     number: string;
 
     @Column()
+    type: string;
+
+    @Column({nullable: true})
+    detailedType: string;
+
+    @Column()
     name: string;
 
     @Column()
