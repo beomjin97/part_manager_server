@@ -41,7 +41,7 @@ export class PartsController {
   }
 
   @Delete('/:id')
-  async delete(@Param("id") id: string) {
-    return await this.partsService.remove(parseInt(id));
+  async delete(@Param("id", ParseIntPipe) id: number) {
+    return await this.partsService.remove(id);
   }
 }
