@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { PartsService } from './parts.service';
 import { SavePartDto } from './dtos/savePart.dto';
 import { UpdatePartDto } from './dtos/updatePart.dto';
@@ -15,8 +15,8 @@ export class PartsController {
   }
 
   @Get("/:id")
-  async findOne(@Param("id") id: string) {
-    return await this.partsService.findOneById(parseInt(id));
+  async findOne(@Param("id", ParseIntPipe) id: number) {
+    return await this.partsService.findOneById(id);
   }
 
   @Post()
@@ -26,16 +26,18 @@ export class PartsController {
 
   @Post("/:partId/history")
   async addHistory(
-    @Param('partId')partId: string, 
-    @Body()addHistoryDto : AddHistoryDto) {
-      return this.partsService.addHistory(parseInt(partId), addHistoryDto);
-    }
+    @Param('partId', ParseIntPipe)partId: number, 
+    @Body()addHistoryDto : AddHistoryDto
+  ) {
+    return this.partsService.addHistory(partId, addHistoryDto);
+  }
 
   @Patch('/:id')
   async update(
-    @Param("id") id: string , 
-    @Body() updatePartDto: UpdatePartDto ) {
-      return await this.partsService.modify(parseInt(id), updatePartDto); 
+    @Param("id", ParseIntPipe) id: number , 
+    @Body() updatePartDto: UpdatePartDto 
+  ) {
+      return await this.partsService.modify(id, updatePartDto); 
   }
 
   @Delete('/:id')

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Param, Patch } from '@nestjs/common';
+import { Body, Controller, Delete, Param, ParseIntPipe, Patch } from '@nestjs/common';
 import { HistoriesService } from './histories.service';
 import { UpdateHistoryDto } from './dtos/updateHistory.dto';
 
@@ -7,12 +7,15 @@ export class HistoriesController {
   constructor(private readonly historiesService: HistoriesService) {}
   
   @Patch("/:id")
-  update(@Param("id") id: string, @Body()updateHistoryDto: UpdateHistoryDto) {
-    return this.historiesService.update(parseInt(id),updateHistoryDto);
+  update(
+    @Param("id", ParseIntPipe) id: number, 
+    @Body()updateHistoryDto: UpdateHistoryDto
+  ) {
+    return this.historiesService.update(id,updateHistoryDto);
   } 
 
   @Delete("/:id")
-  delete(@Param('id') id: string) {
-    return this.historiesService.delete(parseInt(id));
+  delete(@Param('id', ParseIntPipe) id: number) {
+    return this.historiesService.delete(id);
   }
 }
