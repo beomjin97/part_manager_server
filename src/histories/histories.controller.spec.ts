@@ -40,7 +40,7 @@ describe('HistoriesController', () => {
         jest.spyOn(service, 'update')
             .mockImplementation(() => Promise.resolve(updateResult))
         
-        expect(await controller.update('1', updateHistoryDto))
+        expect(await controller.update(1, updateHistoryDto))
     })
 
     it('delete', async () => {
@@ -49,6 +49,6 @@ describe('HistoriesController', () => {
         jest.spyOn(service, 'delete')
             .mockImplementation(() => Promise.resolve(deleteResult))
         
-        expect(await controller.delete('1')).toEqual(deleteResult);
+        expect(await controller.delete(1)).toEqual(deleteResult);
     })
 })

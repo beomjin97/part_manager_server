@@ -68,7 +68,7 @@ describe('PartsController', () => {
       .spyOn(service, 'findOneById')
       .mockImplementation(() => Promise.resolve(part));
     
-    expect(await controller.findOne('1')).toEqual(part);
+    expect(await controller.findOne(1)).toEqual(part);
     expect(spy).toHaveBeenCalledTimes(1)
   })
 
@@ -115,7 +115,7 @@ describe('PartsController', () => {
       .spyOn(service, 'addHistory') 
       .mockImplementation(() => Promise.resolve(partWithAddedHistory));
     
-    expect(await controller.addHistory('1', addHistoryDto)).toEqual(partWithAddedHistory)  
+    expect(await controller.addHistory(1, addHistoryDto)).toEqual(partWithAddedHistory)  
   })
 
   it('update', async () => {
@@ -129,7 +129,7 @@ describe('PartsController', () => {
       .spyOn(service, 'modify')
       .mockImplementation(() => Promise.resolve(updateResult))
 
-    expect(await controller.update('1', {number: "updated_number"}))
+    expect(await controller.update(1, {number: "updated_number"}))
   })
 
   it('delete', async () => {
@@ -137,6 +137,6 @@ describe('PartsController', () => {
       .spyOn(service, 'remove')
       .mockImplementation(() => Promise.resolve(part))
 
-    expect(await controller.delete('1')).toEqual(part);
+    expect(await controller.delete(1)).toEqual(part);
   })
 });
