@@ -14,8 +14,26 @@ export class PartsService {
         private readonly historiesService: HistoriesService
     ) {}
 
-    public findAll(): Promise<Part[]> {
-        return this.partRepository.find();
+    public findAll(
+        type?: string, 
+        detailedType?: string,
+        name?: string, 
+        number?: string, 
+        manufacturer?: string, 
+        storageLocation?: string, 
+        detailedStorageLocation?: string 
+    ): Promise<Part[]> {
+        return this.partRepository.find({
+            where: {
+                type,
+                detailedType,
+                name,
+                number,
+                manufacturer,
+                storageLocation,
+                detailedStorageLocation
+            }
+        });
     }
 
     public async findOneById(id: number): Promise<Part> {

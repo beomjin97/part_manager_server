@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query } from '@nestjs/common';
 import { PartsService } from './parts.service';
 import { SavePartDto } from './dtos/savePart.dto';
 import { UpdatePartDto } from './dtos/updatePart.dto';
@@ -10,8 +10,16 @@ export class PartsController {
   constructor(private partsService:PartsService) {}
   
   @Get()
-  async findAll() {
-    return await this.partsService.findAll();
+  async findAll(
+    @Query('type') type?: string,
+    @Query('detailedType') detailedType?: string,
+    @Query('name') name?: string,
+    @Query('number') number?: string,
+    @Query('manufacturer') manufacturer?: string,
+    @Query('storageLocation') storageLocation?: string,
+    @Query('detailedStorageLocation') detailedStorageLocation?: string
+  ) {
+    return await this.partsService.findAll(type, detailedType, name, number, manufacturer, storageLocation, detailedStorageLocation);
   }
 
   @Get("/:id")
