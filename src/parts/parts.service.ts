@@ -43,9 +43,9 @@ export class PartsService {
     }
 
     public async save(savePartDto: SavePartDto): Promise<Part> {
-        const {isImport, date, quantity, ...partProperties} = savePartDto;
+        const { date, quantity, ...partProperties} = savePartDto;
         
-        const history = await this.historiesService.create({isImport, date, quantity});
+        const history = await this.historiesService.create({isImport: true, date, quantity});
         const part = new Part(partProperties);
         part.histories = [history];
 

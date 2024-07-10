@@ -21,11 +21,9 @@ export class SavePartDto {
     @IsString()
     storageLocation: string;
     
+    @IsOptional()
     @IsString()
     detailedStorageLocation?: string;
-    
-    @IsBoolean()
-    isImport: boolean;
     
     @IsDateString()
     date: Date
