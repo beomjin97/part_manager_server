@@ -1,0 +1,51 @@
+name: Deploy to AWS EC2
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/Hydrogen'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run unit tests
+        run: npm run test
+
+      - name: Run e2e test
+        run: npm run test:e2e
+
+      # - name: Build Docker image
+      #   run: docker build -t part-manager:latest .
+
+      # - name: Save Docker image to file
+      #   run: docker save part-manager:latest -o part-manager.tar
+
+      # - name: Install SSH client
+      #   run: sudo apt-get install -y openssh-client
+
+      # - name: Add SSH key
+      #   run: echo "${{ secrets.EC2_SSH_KEY }}" | base64 -d > /tmp/ssh_key && chmod 600 /tmp/ssh_key
+
+      # - name: Copy Docker image to EC2
+      #   run: scp /tmp/ssh_key ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/home/${{ secrets.EC2_USER }}/
+
+      # - name: Deploy Docker image on EC2
+      #   run: |
+      #     ssh -i /tmp/ssh_key ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}
+      #     docker load -i /home/${{ secrets.EC2_USER}}/part-manager.tar
+      #     docker stop part-manager || true
+      #     docker rm part-manager || true
+      #     docker run -d --name part-manager -p 3000:3000 part-manager:latest
+        
